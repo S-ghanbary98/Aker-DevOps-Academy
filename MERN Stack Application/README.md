@@ -28,11 +28,11 @@ node -v
 npm -v
 ```
 
-![alt text]((images/node.png)
+![alt text](images/node.png)
 
 We next move on to create our application code, which involves creating a directory, 'Todo', and initialise the project via `npm init`.
 
-![alt text]((images/initialize_.png)
+![alt text](images/initialize_.png)
 
 ## ExpressJS Installation
 
@@ -69,12 +69,12 @@ console.log(`Server running on port ${port}`)
 });
 ```
 
-![alt text]((images/expressjs.png)
+![alt text](images/expressjs.png)
 
 We can now test the server through `node index.js`. Change the security groups in our ec2 to allow port 5000, and check the browser.
 
-![alt text]((images/port5000.png)
-![alt text]((images/port5000_result.png)
+![alt text](images/port5000.png)
+![alt text](images/port5000_result.png)
 
 
 Next we are moving on to creating 'Routes', since our application should allow us to create a task, view all tasks, and delete completed tasks. They will be associated with POST,GET,DELETE request. I create a folder called 'routes' in which i create a file called 'app.js' and place the following below.
@@ -185,7 +185,7 @@ console.log(`Server running on port ${port}`)
 
 - After starting the server the following result is seen below.
 
-![alt text]((images/successful_database_connection.png)
+![alt text](images/successful_database_connection.png)
 
 
 ## Frontend Configuration
@@ -503,6 +503,6 @@ monospace;
 
 Finally we can run our application, in the Todo directory we run the application via `npm run dev`.
 
-![alt text]((images/npm_run_dev2.png)
+![alt text](images/npm_run_dev2.png)
 
-![alt text]((images/final_application.png)
+![alt text](images/final_application.png)
