@@ -11,7 +11,7 @@
 
 ## EC2 Configuration
 
-- Firstly two ubuntu 22.04 ec2's are lauched, one the client the other the server. 
+- Firstly, two ubuntu 22.04 ec2's are lauched, one the client the other the server. 
 
  ![ec2](img/ec2.png)
 
