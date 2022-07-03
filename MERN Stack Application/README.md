@@ -12,7 +12,7 @@ This will be done using an aws EC2.
 
 ## Backend Configuration
 
-Firstly I run the series of command below to update and upgrade my OS, along with installing NodeJS, and verifying the installation.
+Firstly, I run the series of command below to update and upgrade my OS, along with installing NodeJS, and verifying the installation.
 
 ```
 # Ubuntu (20.04) ec2
