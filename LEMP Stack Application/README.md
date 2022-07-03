@@ -12,25 +12,25 @@ In this project, I will employ a LAMP  (Linux, Nginx, MySQL, PHP) stack project 
 - Nginx is active and running, html can also seen below when accessed locally via `curl http://127.0.0.1:80`.
 - This was also tested on the browser and yeiled successfull results, the inbound security groups were changed to alllow http get this working.
 
-![alt text](images/nginx_install_check.png)
+![alt text](img//nginx_install_check.png)
 
-![alt text](images/nginx_active.png)
+![alt text](img//nginx_active.png)
 
-![alt text](images/nginx%20_web.png)
+![alt text](img//nginx%20_web.png)
 
 
 ### MySQL Install
 
 - Next we move on to our DMB install, and we do that via `sudo apt install mysql-server`, we then access this through `sudo mysql` to ensure this is successfull.
 
-![alt text](images/mysql_install_access.png)
+![alt text](img//mysql_install_access.png)
 
 
 ### Installing PHP
 
 - PHP was installed and checked via `sudo apt install php libapache2-mod-php php-mysql`, and `php -v` respectively.
 
-![alt text](images/php_install.png)
+![alt text](img//php_install.png)
 
 
 ### Configure nginx to use php processor
@@ -68,7 +68,7 @@ server {
 - We then activate our configuration, by linking it from the sites-available directory `sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/`.
 
 
-![alt text](images/configuration.png)
+![alt text](img//configuration.png)
 
 
 - Finally we disable the default host thats listening on port 80, to then create a html file for your site. A reload of nginx is required to kick start everything. The commands can be seen below.
@@ -79,9 +79,9 @@ sudo systemctl reload nginx
 sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectLEMP/index.html
 ```
 
-![alt text](images/unlink_restart.png)
+![alt text](img//unlink_restart.png)
 
-![alt text](images/new_web.png)
+![alt text](img//new_web.png)
 
 
 ### Integrate php with nginx
@@ -94,7 +94,7 @@ phpinfo();
 ```
 which in turn should give back server information to be displayed in the browser when i enter 'http://ec2_public_ip//info.php'. The result for this can be seen below.
 
-![alt](images/php_info_web.png)
+![alt](img//php_info_web.png)
 
 - This is sensitive information about the server so i deleted the info.php file using `sudo rm /var/www/projectLEMP/info.php`.
 
@@ -107,13 +107,13 @@ which in turn should give back server information to be displayed in the browser
 - Secondly I created an example user to which I'd give permissions to the just created database. `CREATE USER 'example_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';`, `GRANT ALL ON example_database.* TO 'example_user'@'%';`.
 
 
-![alt text](images/db_creation.png)
+![alt text](img//db_creation.png)
 
 
 - Small test to see if user creation was successuful via `mysql -u example_user -p`, along with `SHOW DATABASES;` to see the database.
 
 
-![alt text](images/mysql_user_test.png)
+![alt text](img//mysql_user_test.png)
 
 
 - Next we move on to creating a test table and inserting a few rows.
@@ -131,7 +131,7 @@ PRIMARY KEY(item_id)
 
 ` INSERT INTO example_database.todo_list (content) VALUES ("MY VALUES");`
 
-![alt text](images/mysql_user_test.png)
+![alt text](img//mysql_user_test.png)
 
 
 - Finally we have to move on to configuring a script so that our php can connect to the database. This was done with the following script that was placed in '/var/www/projectLEMP' named todo_list.php.
@@ -159,4 +159,4 @@ try {
 
 The final result it the image below.
 
-![alt](images/final_result.png)
+![alt](img//final_result.png)
