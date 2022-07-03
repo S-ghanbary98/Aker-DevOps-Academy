@@ -150,7 +150,45 @@ df -h
 ```
 ![](img/verify-setup.png)
 
-## Installing WordPress on Web Server
+
+
+## Database Server Setup
+
+- Just like how we configured the volumes on our web-server we do the same thing, but insted of app-lv we create `db-lv` for our logical volume.
+- The security groups are ammended to allow inbound connection on port 3306, for MySQL.
+- We next move on to installing mysql, as well as creating a user with remote access permissions which we will then use to connect our wordpress to the DB.
+
+```
+# update and installation
+sudo yum update
+sudo yum install mysql-server
+
+# restart from dead and enable so service is up after server reboots.
+sudo systemctl restart mysqld
+sudo systemctl enable mysqld
+
+#verify if active
+sudo systemctl status mysqld
+```
+![](img/active_mysql.png)
+
+- Our database and web-server users are created via:
+
+```
+sudo mysql
+CREATE DATABASE <DATABASE_NAME>;
+CREATE USER `myuser`@`<Web-Server-Private-IP-Address>` IDENTIFIED BY 'mypass';
+GRANT ALL ON <DATABASE_NAME>.* TO 'myuser'@'<Web-Server-Private-IP-Address>';
+FLUSH PRIVILEGES;
+SHOW DATABASES;
+exit
+```
+![](img/database-creation.png)
+![](img/user-creation.png)
+
+## WordPress Installation & Configuration
+
+- Firstl, we ammend the security groups of the web-server to allow TCP on port 80
 
 ```
 sudo yum -y update
@@ -161,10 +199,47 @@ sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json
 #start Apache
 sudo systemctl enable httpd sudo systemctl start httpd
 
-
 sudo systemctl restart httpd
 
-# Donwload wordpress in var/www/.html
+# Download wordpress in var/www/.html
+mkdir wordpress 
+cd wordpress 
+sudo wget http://wordpress.org/latest.tar.gz 
+sudo tar xzvf latest.tar.gz 
+sudo rm -rf latest.tar.gz 
+cp wordpress/wp-config-sample.php wordpress/wp-config.php 
+cp -R wordpress /var/www/html/
 
-mkdir wordpress cd wordpress sudo wget http://wordpress.org/latest.tar.gz sudo tar xzvf latest.tar.gz sudo rm -rf latest.tar.gz cp wordpress/wp-config-sample.php wordpress/wp-config.php cp -R wordpress /var/www/html/
 ```
+
+- We configure apache so it could use worpress by changing the `/etc/httpd/conf/httpd.conf` file.
+
+```
+sudo vi /etc/httpd/conf/httpd.conf
+```
+and change the `AllowOverride` to:
+
+```
+AllowOverride All
+Order allow,deny
+Allow from all
+```
+then restart apache `sudo systemctl restart apache`.
+
+- Lastly we test to see if we can make a remote connection to our database server, if successful we can put these credentials in wordpress's `wp-config.php`.
+
+```
+sudo yum install mysql
+sudo mysql -u <USER> -p -h <DB-Server-Private-IP-address>
+```
+![](img/remote-mysql-connection.png)
+
+- Finally, within `var/www/html/wordpress`, we `sudo vi ar/www/html/wordpress/wp-config.php` where we change the credentials to access our database.
+
+![](img/wp-config.php.png)
+
+## Results
+
+![](img/wordpress_install.png)
+![](img/wordpress_web.png)
+
