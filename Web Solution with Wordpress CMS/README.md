@@ -47,6 +47,7 @@ sudo gdisk /dev/xvdf
 ![partioning](img/disk_partition.png)
 
 - A check to view partitions `lsblk`.
+
 ![partioning](img/partioned_volumes.png)
 
 - We can also view these partiotions via:
@@ -240,6 +241,5 @@ sudo mysql -u <USER> -p -h <DB-Server-Private-IP-address>
 
 ## Results
 
-![](img/wordpress_install.png)
 ![](img/wordpress_web.png)
 
