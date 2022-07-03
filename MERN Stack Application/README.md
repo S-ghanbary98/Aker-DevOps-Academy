@@ -2,7 +2,7 @@
 
 ## Intro
 
-In this project I'm going to implement a MERN stack web application consisting off the following:
+In this project, I'm going to implement a MERN stack web application consisting off the following:
 - MongoDB  -- The database
 - ExpressJs -- backend
 - ReactJS -- backend
