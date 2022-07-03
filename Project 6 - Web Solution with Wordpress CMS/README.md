@@ -31,7 +31,12 @@ The linux based distribution I will be using is 'RedHat'.
 # to seee mounts
 df -h 
 ```
+<<<<<<< HEAD
 ![mounts](/img/created-block-devices.png)
+=======
+![mounts](/created-block-devices.png)
+![s](created-block-devices.png)
+>>>>>>> 6c412f9c44dea616d4ec323087dc77704a44a32b
 
 - Next we move on to creating one partition in each of the three volumes 'xvdf', 'xvdg', and 'xvdh'.
 
