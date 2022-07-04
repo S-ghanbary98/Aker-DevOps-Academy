@@ -181,7 +181,6 @@ CREATE DATABASE <DATABASE_NAME>;
 CREATE USER `myuser`@`<Web-Server-Private-IP-Address>` IDENTIFIED BY 'mypass';
 GRANT ALL ON <DATABASE_NAME>.* TO 'myuser'@'<Web-Server-Private-IP-Address>';
 FLUSH PRIVILEGES;
-SHOW DATABASES;
 exit
 ```
 ![](img/database-creation.png)

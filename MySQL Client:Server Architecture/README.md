@@ -39,7 +39,9 @@ systemctl is-active mysql  # verify
 
 ```
 sudo mysql
-GRANT ALL ON database_name.* TO user_name@'ip_address' IDENTIFIED BY 'user_password';
+CREATE DATABASE <DATABASE_NAME>;
+CREATE USER `myuser`@`<Web-Server-Private-IP-Address>` IDENTIFIED BY '<PASSWORD>';
+GRANT ALL ON <DATABASE_NAME>.* TO user_name@'ip_address' IDENTIFIED BY '<PASSWORD>';
 
 ```
  ![user](img/users.png)
