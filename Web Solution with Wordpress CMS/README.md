@@ -26,17 +26,14 @@ The linux based distribution I will be using is 'RedHat'.
 
 ![attached-volumes](img/attached_volumes.png)
 
-
 ```
 # to seee mounts
 df -h 
 ```
 
 ![mounts](img/created-block-devices.png)
-
 ![mounts](img/created-block-devices.png)
 ![s](img/created-block-devices.png)
-
 
 - Next we move on to creating one partition in each of the three volumes 'xvdf', 'xvdg', and 'xvdh'.
 
@@ -150,7 +147,6 @@ sudo mount -a sudo systemctl daemon-reload
 df -h
 ```
 ![](img/verify-setup.png)
-
 
 
 ## Database Server Setup
