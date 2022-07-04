@@ -42,7 +42,7 @@ sudo mysql
 CREATE DATABASE <DATABASE_NAME>;
 CREATE USER `myuser`@`<Web-Server-Private-IP-Address>` IDENTIFIED BY '<PASSWORD>';
 GRANT ALL ON <DATABASE_NAME>.* TO user_name@'ip_address' IDENTIFIED BY '<PASSWORD>';
-
+exit
 ```
  ![user](img/users.png)
 
