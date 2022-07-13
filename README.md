@@ -1,1 +1,1 @@
-# Aker-DevOps-Academy
+# DevOps
