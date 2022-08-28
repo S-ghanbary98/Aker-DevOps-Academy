@@ -54,17 +54,20 @@ terraform destroy
 
 #### Provider
 
+- Terraform finds and installs neccessary packages for the providers when carrying out the `terraform init` command.
+
 ```
 provider "<PROVIDER NAME>" {
     <CONFIGURATION PARAMETERS FOR PROVIDER>
     }
 ```
 
-- AWS Exammple
+- AWS Example
 
 ```
 provider "aws" {
     region = "us-east-1"
+    version = "3.08.22"
 }
 ```
 
@@ -108,3 +111,10 @@ resource "aws_instance" "my vm"{
 ```
 
 - The resource address then becomes data.aws_insatnce.my_vm
+
+
+### Terraform Resource Tracking: State file.
+
+- The mechanism for terraform to know what has been deployed, for terraforms fucntionality. e.g to see whether it is deploying infrastructure, changing infrastructure or destroying it.
+- Contains all metadata about deployemnt and resources. Helps calculate deployment delta and create new deployment plans.
+- `terraform.tfstate` default name of file.
