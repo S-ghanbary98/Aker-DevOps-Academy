@@ -1,6 +1,6 @@
 # Terraform Associate
 
-- In this directory, projects involving terraform will be dsplayed here along with a study guide on the Terraform Associate exam.
+- In this directory, projects involving terraform will be displayed here along with a study guide on the Terraform Associate exam.
 
 ### What is Terraform?
 
@@ -10,8 +10,8 @@
 
 - 3 phases; write - plan - apply
 - write - involves the starting off with version control software ie. github/gitlab
-- plan - plane, review changes code will make to environment
-- Apply - deploye changes to infractructure 
+- plan - plan, review changes code will make to environment
+- Apply - deploy changes to infractructure 
 
 
 ### Terraform Commands
@@ -44,3 +44,67 @@ terraform apply
 
 terraform destroy
 ```
+
+
+### Terraform Code
+
+- firstly you start of the code with the provder you are using, e.g AWS, GCP. Then you move on to provision the resources.
+- Terraform executes file with `.tf` extension.
+- Terraform looks for providers in terraform providers registry, but providers can also be sources locally within terraform code.
+
+#### Provider
+
+```
+provider "<PROVIDER NAME>" {
+    <CONFIGURATION PARAMETERS FOR PROVIDER>
+    }
+```
+
+- AWS Exammple
+
+```
+provider "aws" {
+    region = "us-east-1"
+}
+```
+
+
+#### Resources
+
+- create a resource.
+
+```
+resource "<RESOURCES PROVIDED BY PROVIDER>" "<CUSTOM NAME TAG>"{
+    "<RESOURCE CONFIG>"
+}
+```
+
+- AWS example
+
+```
+resource "aws_instance" "my web server"{
+    ami = "ami-1463434"
+    instance_type = "t2.micro"
+}
+```
+- The resource address then becomes resource.aws_insatnce.mywebserver
+
+#### Data
+
+- for fetching and tracking an existing resource.
+
+```
+data "<RESOURCES PROVIDED BY PROVIDER>" "<CUSTOM NAME TAG>"{
+    "<DATA SOURCE ARGUMENTS>"
+}
+```
+
+- AWS example
+
+```
+resource "aws_instance" "my vm"{
+    instance_id = "i-134765j5j52"
+}
+```
+
+- The resource address then becomes data.aws_insatnce.my_vm
