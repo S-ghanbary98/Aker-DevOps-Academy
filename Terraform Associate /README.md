@@ -118,3 +118,129 @@ resource "aws_instance" "my vm"{
 - The mechanism for terraform to know what has been deployed, for terraforms fucntionality. e.g to see whether it is deploying infrastructure, changing infrastructure or destroying it.
 - Contains all metadata about deployemnt and resources. Helps calculate deployment delta and create new deployment plans.
 - `terraform.tfstate` default name of file.
+
+
+### Terraform Variables and Outputs
+
+#### Set Variable
+
+- Declare a terraform variable via the reserved keyword `variable`. Info within such as `type` and `default` are optional config values.
+- can make code more versatile.
+- Can be specified in terraform file but best practice to place variables within `terraform.tfvars`
+```
+variable "<VARIABLE-NAME>" {
+    description = "this is my var"
+    type = string
+    default = "Hello!"
+}
+
+#no decleration but variable can/must be assigned via an environmnnet variable for expression below or via cli.
+# terraform apply -var myVar=1
+
+variable "myVAR" {}
+
+```
+- Variable is referenced via `var.<VARIABLE-NAME>`, example for one above `var.myVar`.
+
+#### Variable Validation
+
+- Variable validation allows you to set a criteria for the allowed values for a variable.
+- Terraform version 0.13 and above, but was expiremental for version 0.12.
+- `sensitive` parameter keeps it a secret when terraform is executing. A boolean valeu with a default of false.
+
+```
+variable "<my-Var>" {
+    description = "this is my var"
+    type = string
+    default = "Hello!"
+    sensitive - true
+
+    validation {
+      condition   = length(var.my-Var) > 4
+      error-message = "String must be more than 4 characters"
+    }
+
+}
+```
+
+#### Constraints
+
+Base Types:
+- string
+- numbers 
+- bool
+
+Complex Types:
+- lists, sets, map, object, tuple
+
+
+```
+# list of strings variable
+
+variable "<my-Var>" {
+    type = list(string)
+    default = ['us-east-1']
+}
+```
+
+```
+# list of objects variable
+# highest precedence is given to environment varables instead of the variables set in the terraform files.
+
+variable "<my-Var>" {
+    type = list(objects({
+        internal = number
+        external = number
+        protocol = string
+        }))
+
+    default = [{
+        internal = 8300
+        external = 8300
+        protocol = 'tcp'
+    }
+  ]
+}
+```
+
+#### Outputs
+
+- Reserved keyword output.
+- Outputs are shown in the CLI after a terraform apply.
+- Just give a return value in console for user.
+
+```
+output "Instance_IP" {
+    description = "vm private IP"
+    value = aws_instance.my-var.private_ip
+
+}
+```
+
+
+### Terraform Provisioners
+
+- Provisioners give a way to execute custome script and command through terraform resources.
+- Can be run locally or on spun up VM in the cloud after a deployment.
+- Each individuale resource like an ec2within the terraform code can have its own `provisioner` defining the connection method 'ssh/winRM' to then action the scripts.
+
+- There are two types of provisioners; `create-time` and `destroy-time` which you can set to run when resource is being created or destroyed. create is the default.
+
+<strong>Terraform cannot track provisioners in state files, best practice is to use another method with provisioners as a safety net incase it can't be done.</strong>
+
+- Provisioners are recommended when you want to invoke actions not covered by terraform decleration model.
+- Return code must be zero. Execute in sequence.
+
+```
+resource "null_resource" "dummy_resource" {
+    provision "local-exec" {
+        command = "echo '0' > status.txt"
+    }
+
+    provision "local-exec" {
+        when = destroy
+        command = "echo '1' > status.txt"
+    }
+}
+
+```
