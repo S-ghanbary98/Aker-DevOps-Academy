@@ -105,7 +105,7 @@ data "<RESOURCES PROVIDED BY PROVIDER>" "<CUSTOM NAME TAG>"{
 - AWS example
 
 ```
-resource "aws_instance" "my vm"{
+data "aws_instance" "my vm"{
     instance_id = "i-134765j5j52"
 }
 ```
