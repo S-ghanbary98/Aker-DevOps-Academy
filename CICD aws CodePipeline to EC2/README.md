@@ -1,14 +1,15 @@
-# CI/CD CodePipeline Project
+# CI/CD pipeline using Gitlab CI to containerise and deploy a two tier architecture app to AWS ECS with an Application Load Balencer to distribute traffic.
 
 ## Intro
 
  In this project i'm going to build a CICD pipeline in aws using the following aws services
 
- - CodePipeline
- - CodeaDeploy
- - CodeCommit
- - EC2
- - IAM
+ - JavaScript
+ - MongDb
+ - Gitlab CI
+ - AWS ECS
+ - AWS VPC
+ - AWS Application Load Balencer
 
  such that when a change is pushed to code commit this triggers the pipeline to push code to the ec2 instance.
 
